@@ -4,7 +4,7 @@
  * @constructor
  */
 
-var rotLeft = 0;
+var mov = 0;
 
  
 function MySubmarine(scene) {
@@ -22,15 +22,13 @@ MySubmarine.prototype.constructor=MySubmarine;
 
 MySubmarine.prototype.update = function() {
 
-	this.RotateLeft(); 
+	this.MoveFront(); 
 	  		
   }
 
-
-//RODAR ESQUERDA - TECLA A
-  MySubmarine.prototype.RotateLeft = function() {
-
-	rotLeft = rotLeft + 0.3;
+  MySubmarine.prototype.MoveFront = function() {
+  	console.log("Key 'A' pressed");
+	mov=mov+0.5;
   }
 
 
@@ -43,9 +41,8 @@ MySubmarine.prototype.display = function (){
 this.scene.pushMatrix();
 
 	//this.scene.scale(1,1,0.4);
-	//this.scene.translate(mov,0,0);
-	this.scene.rotate(-rotLeft,0,0,1);
-	this.scene.rotate(-Math.PI/2,1,0,0);
+	//this.scene.translate(7.3,7,0);
+	this.scene.rotate(-Math.PI,1,0,0);
 	this.sub.display();
 	
 this.scene.popMatrix();
