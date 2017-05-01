@@ -109,8 +109,10 @@ LightingScene.prototype.init = function(application) {
 	this.cylinderAppearance.loadTexture("resources/images/cylinder.png");
 
 
-	//this.setUpdatePeriod(1000000);
-
+////////////////////Descomentar no fim
+/*
+	this.setUpdatePeriod(1000000);
+*/
 
 };
 
@@ -193,6 +195,8 @@ LightingScene.prototype.updateLights = function() {
 		this.lights[i].update();
 }
 
+//Descomentar no fim
+/*
 LightingScene.prototype.update = function(currTime) {
 	//
 	var tempo = currTime/1000; 
@@ -214,7 +218,7 @@ LightingScene.prototype.update = function(currTime) {
 		this.timer = tempo;
 
 }
-
+*/
 LightingScene.prototype.display = function() {
 	// ---- BEGIN Background, camera and axis setup
 
@@ -331,6 +335,7 @@ this.popMatrix();
 
 this.pushMatrix();
 
+
 	this.clock.display();
 
 this.popMatrix();
@@ -338,15 +343,11 @@ this.popMatrix();
 
 this.pushMatrix();
 
-	this.scale(1,6,1);
+	this.translate(7.3,0,0);
 
-	this.translate(7,1,1);
-
-	this.scale(1/3, 1/3, 1/3);
-
-	this.scale(1,6,1);
-
-	this.rotate(Math.PI/2,1,0,0); 
+	this.scale(1/3,6,1/3);
+	
+	this.rotate(-Math.PI/2, 1,0,0 );
 
 	this.poste.display();
 
@@ -354,6 +355,12 @@ this.popMatrix();
 
 
 this.pushMatrix();
+
+
+
+this.translate(7,3,7);
+
+this.rotate(-Math.PI,0,1,0);
 
 this.submarine.display();
 
