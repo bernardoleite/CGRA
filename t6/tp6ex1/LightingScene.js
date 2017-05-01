@@ -68,8 +68,8 @@ LightingScene.prototype.init = function(application) {
 	this.floorAppearance = new CGFappearance(this);
 	this.floorAppearance.setAmbient(0.7,0.7,0.7,1);
 	this.floorAppearance.setDiffuse(255/255,204/255,229/255,1);
-	this.floorAppearance.loadTexture("resources/images/ocean.png");
-	this.floorAppearance.setTextureWrap("CLAMP_TO_EDGE", "CLAMP_TO_EDGE");
+	this.floorAppearance.loadTexture("resources/images/water.png");
+	//this.floorAppearance.setTextureWrap("CLAMP_TO_EDGE", "CLAMP_TO_EDGE");
 	this.floorAppearance.setSpecular(0.1,0.1,0.1,1);	
 	this.floorAppearance.setShininess(120);
 
@@ -265,16 +265,16 @@ LightingScene.prototype.display = function() {
 		this.translate(0, 4, 7.5);
 		this.rotate(90 * degToRad, 0, 1, 0);
 		this.scale(15, 8, 0.2);
-		this.windowAppearance.apply();
-		//this.wall.display();
+		//this.windowAppearance.apply();
+		this.wall.display();
 	this.popMatrix();
 
 	// Plane Wall
 	this.pushMatrix();
 		this.translate(7.5, 4, 0);
 		this.scale(15, 8, 0.2);
-		this.materialWall.apply();
-		//this.wall.display();
+		//this.materialWall.apply();
+		this.wall.display();
 	this.popMatrix();
 
 	// First Table
