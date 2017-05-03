@@ -39,6 +39,8 @@ LightingScene.prototype.init = function(application) {
 	this.clock = new MyClock(this);
 	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this,100,20);
+	this.bubble = new MyBigBubble(this);
+
 	
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
@@ -65,13 +67,13 @@ LightingScene.prototype.init = function(application) {
 	this.materialC.setSpecular(0.8,0.8,0.8,1);	
 	this.materialC.setShininess(120);
 
-	this.floorAppearance = new CGFappearance(this);
-	this.floorAppearance.setAmbient(0.7,0.7,0.7,1);
-	this.floorAppearance.setDiffuse(255/255,204/255,229/255,1);
-	this.floorAppearance.loadTexture("resources/images/water.png");
-	//this.floorAppearance.setTextureWrap("CLAMP_TO_EDGE", "CLAMP_TO_EDGE");
-	this.floorAppearance.setSpecular(0.1,0.1,0.1,1);	
-	this.floorAppearance.setShininess(120);
+	this.WaterAppearance = new CGFappearance(this);
+	this.WaterAppearance.setAmbient(0.3,0.3,0.3,1);
+	this.WaterAppearance.setDiffuse(5,5,80,1);
+	this.WaterAppearance.loadTexture("resources/images/teste.png");
+	//this.WaterAppearance.setTextureWrap("REPEAT", "REPEAT");
+	this.WaterAppearance.setSpecular(0.1,0.1,0.1,1);	
+	//this.WaterAppearance.setShininess(120);
 
 	this.materialWall = new CGFappearance(this);
 	this.materialWall.setAmbient(0.7,0.7,0.7,1);
@@ -106,7 +108,7 @@ LightingScene.prototype.init = function(application) {
 	this.cylinderAppearance.setAmbient(0.4,0.4,0.4,1);	
 	this.cylinderAppearance.setShininess(10);
 	this.cylinderAppearance.setSpecular(0.1,0.1,0.1,1);
-	this.cylinderAppearance.loadTexture("resources/images/cylinder.png");
+	this.cylinderAppearance.loadTexture("resources/images/metal.png");
 
 
 ////////////////////Descomentar no fim
@@ -251,8 +253,9 @@ LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Primitive drawing section
 
+
 	// Floor
-	this.pushMatrix();
+	/*this.pushMatrix();
 		this.translate(7.5, 0, 7.5);
 		this.rotate(-90 * degToRad, 1, 0, 0);
 		this.scale(15, 15, 0.2);
@@ -275,7 +278,7 @@ LightingScene.prototype.display = function() {
 		this.scale(15, 8, 0.2);
 		//this.materialWall.apply();
 		this.wall.display();
-	this.popMatrix();
+	this.popMatrix();*/
 
 	// First Table
 	this.pushMatrix();
@@ -333,6 +336,7 @@ this.pushMatrix();
 this.popMatrix();
 
 
+
 this.pushMatrix();
 
 
@@ -351,18 +355,28 @@ this.pushMatrix();
 	
 	this.rotate(-Math.PI/2, 1,0,0 );
 
-	this.poste.display();
+	//this.poste.display();
 
 this.popMatrix();
 
 
+
+
 this.pushMatrix();
 
+		//bubble
+	this.pushMatrix();
+	//this.translate(5,5,10);
+	//this.WaterAppearance.apply();
+		this.bubble.display();
+				//this.materialDefault.apply();
 
+	this.popMatrix();
 
 this.translate(7,3,7);
 
-this.rotate(-Math.PI,0,1,0);
+//this.rotate(-Math.PI,0,1,0);
+	this.cylinderAppearance.apply();
 
 this.submarine.display();
 
