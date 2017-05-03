@@ -3,40 +3,35 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function MyQuad(scene, minS = 0, maxS=1, minT=0, maxT=1) {
+function MyTriangle(scene, minS = 0, maxS=1, minT=0) {
 	CGFobject.call(this,scene);
 	
 	this.minS = minS;
 	this.minT = minT;
 	this.maxS = maxS;
-	this.maxT = maxT;
-
 	
 	this.initBuffers();
 };
 
-MyQuad.prototype = Object.create(CGFobject.prototype);
-MyQuad.prototype.constructor=MyQuad;
+MyTriangle.prototype = Object.create(CGFobject.prototype);
+MyTriangle.prototype.constructor=MyTriangle;
 
-MyQuad.prototype.initBuffers = function () {
+MyTriangle.prototype.initBuffers = function () {
 	this.vertices = [
             -0.5, -0.5, 0,
             0.5, -0.5, 0,
             -0.5, 0.5, 0,
-            0.5, 0.5, 0
 			];
 
 	this.indices = [
             0, 1, 2, 
-			3, 2, 1
         ];
 
    
     this.texCoords = [ 
     	this.minS,this.maxT,
     	this.maxS,this.maxT,
-    	this.minS,this.minT,
-    	this.maxS,this.minT
+    	this.minS,this.minT
     ];
 
 		
@@ -46,10 +41,8 @@ MyQuad.prototype.initBuffers = function () {
 	   this.normals = [
 		0, 0, 1,
 		0, 0, 1,
-		0, 0, 1,
 		0, 0, 1
-
-       ];
+       ]
 
 
 	this.initGLBuffers();

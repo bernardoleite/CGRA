@@ -61,6 +61,7 @@ MyClock.prototype.constructor=MyClock;
 
 
 MyClock.prototype.display = function (){
+    this.scene.pushMatrix();
 
 this.scene.pushMatrix();
 
@@ -102,6 +103,7 @@ this.scene.pushMatrix();
 	this.scene.rotate(180*(Math.PI/180)-clockSecAngle*(Math.PI/180), 0 , 0, 1);
 	this.handSec.display();
 
+this.scene.popMatrix();
 this.scene.popMatrix();
 
 

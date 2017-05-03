@@ -40,7 +40,6 @@
    var z = 0;
 	var stack = 1;
 
-
 for (stack = 1; stack <= this.stacks; stack++)
 {
 

@@ -337,6 +337,8 @@ this.pushMatrix();
 
 
 	this.clock.display();
+		this.materialDefault.apply();
+
 
 this.popMatrix();
 
