@@ -374,9 +374,9 @@ this.popMatrix();
 
 this.pushMatrix();
 
-	this.translate(7.3,0,0);
+	this.translate(7.3,0.1,0.15);
 
-	this.scale(1/3,6,1/3);
+	this.scale(1/5,6,1/5);
 	
 	this.rotate(-Math.PI/2, 1,0,0 );
 

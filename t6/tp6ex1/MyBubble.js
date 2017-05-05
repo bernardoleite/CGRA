@@ -12,10 +12,14 @@ function MyBubble(scene, slices, stacks) {
 
  MyBubble.prototype.initBuffers = function() {
 	
- 	this.vertices = [];
- 	this.indices = [];
-	this.normals = [];
-	this.texCoords = [];
+ 	this.indices = [
+ 	];
+ 	this.vertices = [
+ 	];
+ 	this.normals = [
+ 	];
+ 	this.texCoords = [
+ 	];
 
 	var angle = 2 * Math.PI / (this.slices);
 	var angle_height = (Math.PI / 2)/this.stacks;
@@ -40,7 +44,7 @@ function MyBubble(scene, slices, stacks) {
 	this.normals.push(0, 0, -1);
 	
 	var n = this.slices + 1;
-	for (var stack = 0; stack < this.stacks - 1; stack++)
+	for (var stack = 0; stack < this.stacks ; stack++)
 	{
 		for (var slice = 0; slice < this.slices; slice++)
 		{
@@ -54,7 +58,7 @@ function MyBubble(scene, slices, stacks) {
 	for (var slice = -1; slice < this.slices; slice++)
 	{
 		this.vertices.push(Math.cos(slice * angle), Math.sin(slice * angle), 0);
-		this.normals.push(0, 0, 1);
+		this.normals.push(0, 0, -1);
 	}
 
 	for (var slice = 0; slice < this.slices; slice++)

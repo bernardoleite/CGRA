@@ -33,7 +33,7 @@ this.scene.scale(100,100,100);
 
 
 this.scene.pushMatrix();
-	//this.scene.rotate(Math.PI, 1,0,0);
+	//this.scene.rotate(-Math.PI/23, 0,0,11);
 	this.WaterAppearance.apply();
     this.bubble.display();
 this.scene.popMatrix();

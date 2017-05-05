@@ -29,9 +29,9 @@ MyTriangle.prototype.initBuffers = function () {
 
    
     this.texCoords = [ 
-    	this.minS,this.maxT,
-    	this.maxS,this.maxT,
-    	this.minS,this.minT
+    	1,0,
+    	0,1,
+    	1,1,
     ];
 
 		
