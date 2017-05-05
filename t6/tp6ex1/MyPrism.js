@@ -103,7 +103,7 @@ for (stack = 1; stack <= this.stacks; stack++)
 }
 
 
-	console.log(this.normals);
+	
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
  };

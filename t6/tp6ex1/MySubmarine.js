@@ -4,7 +4,9 @@
  * @constructor
  */
 
-var rotLeft = 0;
+var rot = 0;
+var go = 0;
+var ctr = 0;
 
  
 function MySubmarine(scene) {
@@ -27,9 +29,29 @@ MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor=MySubmarine;
 
 
+
 MySubmarine.prototype.update = function() {
 
-	this.RotateLeft(); 
+	this.RotateLeft();
+	
+	  		
+  }
+
+ MySubmarine.prototype.update = function() {
+
+	this.RotateRight(); 
+	  		
+  }
+
+
+MySubmarine.prototype.update = function() {
+
+	this.goFront();		
+  }
+
+ MySubmarine.prototype.update = function() {
+
+	this.goBack(); 
 	  		
   }
 
@@ -37,15 +59,39 @@ MySubmarine.prototype.update = function() {
 //RODAR ESQUERDA - TECLA A
   MySubmarine.prototype.RotateLeft = function() {
 
-	rotLeft = rotLeft + 0.3;
+	rot = rot + 0.3;
+	ctr = 2;
+
+  }
+
+//RODAR DIREITA- TECLA D
+  MySubmarine.prototype.RotateRight = function() {
+
+	rot = rot - 0.3;
+	ctr = 2;
+
+  }
+
+//IR PARA A FRENTE- TECLA W
+  MySubmarine.prototype.goFront = function() {
+
+	go = go + 0.3;
+	ctr = 1;
+
+  }
+
+//IR PARA TRÁS- TECLA S
+  MySubmarine.prototype.goBack = function() {
+
+	go = go - 0.3;
+	ctr = 1;
+
   }
 
 
 
-
-
-
 MySubmarine.prototype.display = function (){
+
 
 
 this.scene.pushMatrix();
@@ -103,6 +149,8 @@ this.scene.popMatrix();
 this.scene.pushMatrix();
 	this.helice.display();
 this.scene.popMatrix();
+
+
 
 }
 

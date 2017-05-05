@@ -16,7 +16,8 @@ LightingScene.prototype.constructor = LightingScene;
 LightingScene.prototype.init = function(application) {
 	CGFscene.prototype.init.call(this, application);
 
-	this.option1=true; this.option2=false; this.speed=3;
+	this.luz0=true; this.luz1=true; this.luz2=true; this.luz3=true;
+	this.luz4=true; this.luz5=true; this.SubmarineSpeed=3; this.Clock = true;
 
 	this.initCameras();
 
@@ -37,8 +38,8 @@ LightingScene.prototype.init = function(application) {
 	this.prism = new MyPrism(this, 8, 20); // 8 lados e 20 andares
 	this.cylinder = new MyCylinder(this, 100, 20); 
 	this.clock = new MyClock(this);
-	this.submarine = new MySubmarine(this);
-	this.poste = new MyCylinder(this,100,20);
+	this.submarine = new MyTotalSub(this);
+	this.poste = new MyCylinder(this,100,1);
 	this.bubble = new MyBigBubble(this);
 
 	
@@ -112,9 +113,9 @@ LightingScene.prototype.init = function(application) {
 
 
 ////////////////////Descomentar no fim
-/*
-	this.setUpdatePeriod(1000000);
-*/
+
+	this.setUpdatePeriod(100);
+
 
 };
 
@@ -138,38 +139,29 @@ LightingScene.prototype.initLights = function() {
 	
 	this.lights[4].setPosition(0, 4, 7.5, 1.0);
 	this.lights[4].setVisible(true);
-//3.1
+
 	this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
 	this.lights[2].setVisible(true); // show marker on light position (different from enabled)
 
-//3.4
 	this.lights[3].setPosition(4, 6, 5, 1); 
 	this.lights[3].setVisible(true); // show marker on light position (different from enabled)
-
-	//this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
-	//this.lights[1].setVisible(true); // show marker on light position (different from enabled)
-	//this.lights[3].setPosition(4, 6.0, 5.0, 1.0);
-	//this.lights[1].setVisible(true); // show marker on light position (different from enabled)
 
 	this.lights[0].setAmbient(0, 0, 0, 1); // alterado para se ver prisma melhor
 	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[0].setSpecular(1,1,0,1); // 2.8
-	this.lights[0].enable();
+
 
 	this.lights[1].setAmbient(0, 0, 0, 1); //alterado para se ver prisma melhor
 	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[1].enable(); //2.3
 
-//3.1 3.2
+
 	this.lights[2].setAmbient(0, 0, 0, 1);
 	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[2].setSpecular(1.0, 1.0, 1.0, 1.0); //novo
 	this.lights[2].setConstantAttenuation(0); //3.2
 	this.lights[2].setLinearAttenuation(1); //3.2 & 3.3
 	this.lights[2].setQuadraticAttenuation(0);	//3.2
-	this.lights[2].enable(); 
 
-//3.4
 
 	this.lights[3].setAmbient(0, 0, 0, 1);
 	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -177,7 +169,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setConstantAttenuation(0); 
 	this.lights[3].setLinearAttenuation(0); 
 	this.lights[3].setQuadraticAttenuation(0.2);	
-	this.lights[3].enable();
+
 
 	this.lights[4].setAmbient(0, 0, 0, 1);
 	this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -185,7 +177,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[4].setConstantAttenuation(0); 
 	this.lights[4].setLinearAttenuation(0); 
 	this.lights[4].setQuadraticAttenuation(0.2);	
-	this.lights[4].enable();
+
 
 };
 
@@ -198,12 +190,13 @@ LightingScene.prototype.updateLights = function() {
 }
 
 //Descomentar no fim
-/*
+
 LightingScene.prototype.update = function(currTime) {
-	//
+	
 	var tempo = currTime/1000; 
 	tempo = Math.floor(tempo);
-//
+
+if (this.Clock == true){
 	if (this.timer != -1)
 	{
 		if (this.timer == tempo)
@@ -218,9 +211,41 @@ LightingScene.prototype.update = function(currTime) {
 
 	else if (this.timer == -1)
 		this.timer = tempo;
+}
+
+	if(this.luz0 == true){
+	this.lights[0].enable();
+	}else{
+		this.lights[0].disable();
+	}
+	if(this.luz1 == true){
+		this.lights[1].enable();
+	}else{
+		this.lights[1].disable();
+	}
+	if(this.luz2 == true){
+		this.lights[2].enable();
+	}else{
+		this.lights[2].disable();
+	}
+	if(this.luz3 == true){
+		this.lights[3].enable();
+	}else{
+		this.lights[3].disable();
+	}
+	if(this.luz4 == true ){
+		this.lights[4].enable();
+	}else{
+		this.lights[4].disable();
+	}
+	if(this.luz5 == true){
+		this.lights[5].enable();
+	}else{
+		this.lights[5].disable();
+	}
 
 }
-*/
+
 LightingScene.prototype.display = function() {
 	// ---- BEGIN Background, camera and axis setup
 
@@ -355,7 +380,9 @@ this.pushMatrix();
 	
 	this.rotate(-Math.PI/2, 1,0,0 );
 
-	//this.poste.display();
+	this.cylinderAppearance.apply();
+
+	this.poste.display();
 
 this.popMatrix();
 
@@ -375,12 +402,24 @@ this.pushMatrix();
 
 this.translate(7,3,7);
 
-//this.rotate(-Math.PI,0,1,0);
+
 	this.cylinderAppearance.apply();
+
+
+this.popMatrix();
+
+
+this.pushMatrix();
+
+this.translate(5,0,2);
+
+this.rotate(Math.PI/2,0,1,0);
 
 this.submarine.display();
 
 this.popMatrix();
+
+
 
 };
 

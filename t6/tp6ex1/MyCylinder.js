@@ -32,7 +32,6 @@
 	this.indices = [];
 	this.normals = [];
 	this.texCoords = [];
-	
 
    var k = 1;
    var vert = 0;
@@ -43,7 +42,7 @@
 for (stack = 1; stack <= this.stacks; stack++)
 {
 
-		for (lados = 0; lados <= numberOfSides; lados += 1) {
+		for (lados = 0; lados < numberOfSides; lados += 1) {
 
 		this.vertices.push(Xcenter + size * Math.cos(k * 2 * Math.PI / numberOfSides), 
 		Ycenter + size * Math.sin(k * 2 * Math.PI / numberOfSides), z);
@@ -53,8 +52,8 @@ for (stack = 1; stack <= this.stacks; stack++)
 					Math.sin(k*(2*Math.PI/numberOfSides) ),
 					0 
 					);
-		this.texCoords.push(lados/numberOfSides,1-(stack-1)/(this.stacks-1));
-
+		this.texCoords.push(lados*1.0/numberOfSides,1-(stack-1)/this.stacks);
+		
 
 		this.vertices.push(Xcenter + size * Math.cos(k * 2 * Math.PI / numberOfSides),
 		Ycenter + size * Math.sin(k * 2 * Math.PI / numberOfSides),
@@ -67,7 +66,7 @@ for (stack = 1; stack <= this.stacks; stack++)
 					0 
 					);
 
-		this.texCoords.push(lados/numberOfSides,1-(stack-1)/(this.stacks-1));
+		this.texCoords.push(lados*1.0/numberOfSides,1-stack/this.stacks);
 
 		k = k + 1; //importante para mudança de angulo
 
@@ -81,7 +80,7 @@ for (stack = 1; stack <= this.stacks; stack++)
 					Math.sin(k*(2*Math.PI/numberOfSides) ),
 					0 
 					);
-		this.texCoords.push(lados/numberOfSides,1-(stack-1)/(this.stacks-1));
+		this.texCoords.push((lados+1)*1.0/numberOfSides,1-(stack-1)/this.stacks);
 
 		this.vertices.push(Xcenter + size * Math.cos(k * 2 * Math.PI / numberOfSides),
 		Ycenter + size * Math.sin(k * 2 * Math.PI / numberOfSides),
@@ -92,7 +91,7 @@ for (stack = 1; stack <= this.stacks; stack++)
 					Math.sin(k*(2*Math.PI/numberOfSides) ),
 					0
 					);
-			this.texCoords.push(lados/numberOfSides,1-(stack-1)/(this.stacks-1));
+			this.texCoords.push((lados+1)/numberOfSides,1-stack/this.stacks);
 
 		this.indices.push(vert, vert + 2, vert + 3); //formar 1º triangulo da face
 		this.indices.push(vert+3, vert + 1, vert ); // formar 2º triangulo da face
@@ -110,7 +109,7 @@ var vari = 1;
 
 
 
-	console.log(this.normals);
+	console.log(this.texCoords);
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
  };
