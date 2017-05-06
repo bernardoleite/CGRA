@@ -38,7 +38,7 @@ LightingScene.prototype.init = function(application) {
 	this.prism = new MyPrism(this, 8, 20); // 8 lados e 20 andares
 	this.cylinder = new MyCylinder(this, 100, 20); 
 	this.clock = new MyClock(this);
-	this.submarine = new MyTotalSub(this);
+	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this,100,1);
 	this.bubble = new MyBigBubble(this);
 
@@ -413,7 +413,7 @@ this.pushMatrix();
 
 this.translate(5,0,2);
 
-this.rotate(Math.PI/2,0,1,0);
+//this.rotate(Math.PI/2,0,1,0);
 
 this.submarine.display();
 

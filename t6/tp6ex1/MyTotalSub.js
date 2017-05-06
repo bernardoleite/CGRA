@@ -1,20 +1,19 @@
 /**
- * MyTotalSub
+ * MySubmarine
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
 
-var rot = 0;
-var go = 0;
-var ctr = 0;
 
- 
 function MyTotalSub(scene) {
 	CGFobject.call(this,scene);
 
 
 	this.initBuffers();
 	this.sub = new MySubmarine(this.scene);
+	this.angle = Math.PI/2;
+    this.x = 0;
+    this.z = 0;
 
 };
 
@@ -23,87 +22,44 @@ MyTotalSub.prototype.constructor=MyTotalSub;
 
 
 
-MyTotalSub.prototype.update = function() {
+MyTotalSub.prototype.goLeft = function() {
+    let newAng = this.angle + 10 * degToRad;
+    if (newAng > 2 * Math.PI)
+        this.angle = newAng - 2 * Math.PI;
+    else
+        this.angle = newAng;
+}
+;
 
-	this.RotateLeft();
-	
-	  		
-  }
-
- MyTotalSub.prototype.update = function() {
-
-	this.RotateRight(); 
-	  		
-  }
-
-
-MyTotalSub.prototype.update = function() {
-
-	this.goFront();		
-  }
-
- MyTotalSub.prototype.update = function() {
-
-	this.goBack(); 
-	  		
-  }
+MyTotalSub.prototype.goRight = function() {
+    let newAng = this.angle - 10 * degToRad;
+    if (newAng < 0)
+        this.angle = 2 * Math.PI + newAng;   //newAng is <0
+    else
+        this.angle = newAng;
+}
+;
 
 
-//RODAR ESQUERDA - TECLA A
-  MyTotalSub.prototype.RotateLeft = function() {
+MyTotalSub.prototype.goFront = function() {
+    	this.x += Math.cos(this.angle);
+    	this.z -= Math.sin(this.angle);
+};
 
-	rot = rot + 0.3;
-	ctr = 2;
-
-  }
-
-//RODAR DIREITA- TECLA D
-  MyTotalSub.prototype.RotateRight = function() {
-
-	rot = rot - 0.3;
-	ctr = 2;
-
-  }
-
-//IR PARA A FRENTE- TECLA W
-  MyTotalSub.prototype.goFront = function() {
-
-	go = go + 0.3;
-	ctr = 1;
-
-  }
-
-//IR PARA TRÁS- TECLA S
-  MyTotalSub.prototype.goBack = function() {
-
-	go = go - 0.3;
-	ctr = 1;
-
-  }
-
+MyTotalSub.prototype.goBack = function() {
+    	this.x -= Math.cos(this.angle);
+    	this.z += Math.sin(this.angle);
+};
 
 MyTotalSub.prototype.display = function (){
 
 
 
-this.scene.pushMatrix();
+  this.scene.pushMatrix();
 
-this.scene.rotate(rot,0,1,0);
-this.scene.translate(go*Math.cos(rot),0,go*Math.sin(rot));
-	
+     this.scene.translate(this.x, 0, this.z);
+    this.scene.rotate(this.angle + Math.PI/2 , 0, 1, 0);
+     this.sub.display();
 
-this.sub.display();
-
-this.scene.popMatrix();
-
-
-
-
-
+  this.scene.popMatrix();
 }
-
-
-
-
-
-

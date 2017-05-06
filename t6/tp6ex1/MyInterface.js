@@ -74,27 +74,27 @@ MyInterface.prototype.processKeyboard = function(event) {
 	{
 		case (65): // 'A'
 		{
-		    this.scene.submarine.RotateLeft();
+		    this.scene.submarine.goLeft();
 		    
 		    break;
 		}
 
         case(97): // 'a'
 		{
-			this.scene.submarine.RotateLeft();
+			this.scene.submarine.goLeft();
 			
 		    break;
 		}
 
 		case(68): // 'D'
 		{
-			this.scene.submarine.RotateRight();
+			this.scene.submarine.goRight();
 		    break;
 		}
 
 		case(100): // 'd'
 		{
-			this.scene.submarine.RotateRight();
+			this.scene.submarine.goRight();
 		    break;
 		}
 
