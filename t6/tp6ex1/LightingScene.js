@@ -19,6 +19,15 @@ LightingScene.prototype.init = function(application) {
 	this.luz0=true; this.luz1=true; this.luz2=true; this.luz3=true;
 	this.luz4=true; this.luz5=true; this.SubmarineSpeed=3; this.Clock = true;
 
+	this.Metal="resources/images/metal.png";
+	this.Simpson="resources/images/cylinder.png";
+	this.Blue="resources/images/water.png";
+
+	this.textures = [this.Metal,this.Simpson,this.Blue];
+	this.textIndice=1;
+	this.Texture = 1;
+
+	
 	this.initCameras();
 
 	this.initLights();
@@ -192,6 +201,16 @@ LightingScene.prototype.updateLights = function() {
 //Descomentar no fim
 
 LightingScene.prototype.update = function(currTime) {
+
+		if(this.textIndice != this.Texture)
+		{
+		this.textIndice=this.Texture;this.textFg=true;
+		}
+		if(this.textFg == true){
+		this.cylinderAppearance.loadTexture(this.textures[this.Texture]);
+		this.textFg=false;
+		}
+	
 	
 	var tempo = currTime/1000; 
 	tempo = Math.floor(tempo);

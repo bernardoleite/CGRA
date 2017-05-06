@@ -54,6 +54,10 @@ MyInterface.prototype.init = function(application) {
 	
 	this.gui.add(this.scene, 'SubmarineSpeed', -5, 5);
 	this.gui.add(this.scene, 'Clock');
+	this.gui.add(this.scene, 'Texture', 
+	{ Metal: 0, Simpson: 1, Blue: 2} );
+
+	
 
 	return true;
 };
