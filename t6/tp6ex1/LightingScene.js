@@ -210,6 +210,8 @@ LightingScene.prototype.update = function(currTime) {
 		this.cylinderAppearance.loadTexture(this.textures[this.Texture]);
 		this.textFg=false;
 		}
+
+			this.submarine.update();
 	
 	
 	var tempo = currTime/1000; 

@@ -24,7 +24,7 @@ serialInclude([
 	'MyBackHelice.js',
 	'MyBubble.js',
 	'MyBigBubble.js',
-	'MyTotalSub.js',
+	'MyHeli.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
