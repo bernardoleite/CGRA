@@ -52,7 +52,7 @@ MyInterface.prototype.init = function(application) {
 	// this.speed=3;
 	// min and max values can be specified as parameters
 	
-	this.gui.add(this.scene, 'SubmarineSpeed', -5, 5);
+	//this.gui.add(this.scene, 'SubmarineSpeed', -5, 5);
 	this.gui.add(this.scene, 'Clock');
 	this.gui.add(this.scene, 'Texture', 
 	{ Metal: 0, Simpson: 1, Blue: 2} );
@@ -123,6 +123,55 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case(115): // 's'
 		{
 			this.scene.submarine.goFront();
+		    break;
+		}
+
+		// updowm
+		case(81): // 'Q'
+		{
+			this.scene.submarine.goUp();
+		    break;
+		}
+
+		case(113): // 'q'
+		{
+			this.scene.submarine.goUp();
+		    break;
+		}
+
+		case(69): // 'E'
+		{
+			this.scene.submarine.goDown();
+		    break;
+		}
+
+		case(101): // 'e'
+		{
+			this.scene.submarine.goDown();
+		    break;
+		}
+
+		case(80): // 'P'
+		{
+			this.scene.submarine.goPerUp();
+		    break;
+		}
+
+		case(112): // 'p'
+		{
+			this.scene.submarine.goPerUp();
+		    break;
+		}
+
+		case(76): // 'L'
+		{
+			this.scene.submarine.goPerDown();
+		    break;
+		}
+
+		case(108): // 'l'
+		{
+			this.scene.submarine.goPerDown();
 		    break;
 		}
 	};

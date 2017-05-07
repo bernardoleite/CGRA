@@ -25,7 +25,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.textures = [this.Metal,this.Simpson,this.Blue];
 	this.textIndice=1;
-	this.Texture = 1;
+	this.Texture = 0;
 
 	
 	this.initCameras();
@@ -119,6 +119,14 @@ LightingScene.prototype.init = function(application) {
 	this.cylinderAppearance.setShininess(10);
 	this.cylinderAppearance.setSpecular(0.1,0.1,0.1,1);
 	this.cylinderAppearance.loadTexture("resources/images/metal.png");
+
+	this.posteAppearance = new CGFappearance(this);
+	this.posteAppearance.setDiffuse(1,1,1,1);
+	this.posteAppearance.setAmbient(0.4,0.4,0.4,1);	
+	this.posteAppearance.setShininess(10);
+	this.posteAppearance.setSpecular(0.1,0.1,0.1,1);
+	this.posteAppearance.loadTexture("resources/images/metal.png");
+
 
 
 ////////////////////Descomentar no fim
@@ -401,9 +409,11 @@ this.pushMatrix();
 	
 	this.rotate(-Math.PI/2, 1,0,0 );
 
-	this.cylinderAppearance.apply();
+	this.posteAppearance.apply();
 
 	this.poste.display();
+
+	this.materialDefault.apply();
 
 this.popMatrix();
 
@@ -432,7 +442,7 @@ this.popMatrix();
 
 this.pushMatrix();
 
-this.translate(5,0,2);
+//this.translate(5,0,2);
 
 //this.rotate(Math.PI/2,0,1,0);
 
