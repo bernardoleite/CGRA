@@ -18,13 +18,15 @@ serialInclude([
 	'MySubmarine.js',
 	'MyHelice.js',
 	'MyTelescope.js',
-	'MySemiSphere.js',
+	'MyLamp.js',
 	'MyTrapezius.js',
 	'MyTriangle.js',
 	'MyBackHelice.js',
-	'MyBubble.js',
+	'MyLampInverted.js',
 	'MyBigBubble.js',
 	'MyHeli.js',
+	'MyTorpedo.js',
+	'MyTarget.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

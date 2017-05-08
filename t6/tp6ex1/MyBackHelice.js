@@ -6,7 +6,7 @@
 function MyBackHelice(scene) {
 	CGFobject.call(this,scene);
 	
-	this.ssphere = new MySemiSphere(this.scene, 100, 5);
+	this.ssphere = new MyLamp(this.scene, 100, 5);
 	this.trapezius = new MyTrapezius(this.scene);
 	
 };

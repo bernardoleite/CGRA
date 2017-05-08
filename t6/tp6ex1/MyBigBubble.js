@@ -6,7 +6,7 @@
 function MyBigBubble(scene) {
 	CGFobject.call(this,scene);
 	
-	this.bubble = new MyBubble(this.scene, 100, 5);
+	this.bubble = new MyLampInverted(this.scene, 100, 5);
 
 	this.WaterAppearance = new CGFappearance(this.scene);
 	this.WaterAppearance.setAmbient(0.3,0.3,0.3,1);
@@ -41,7 +41,7 @@ this.scene.popMatrix();
 this.scene.pushMatrix();
 	this.scene.rotate(Math.PI, 1,0,0);
 	this.WaterAppearance2.apply();
-    this.bubble.display();
+   this.bubble.display();
 this.scene.popMatrix();
 
 this.scene.popMatrix();

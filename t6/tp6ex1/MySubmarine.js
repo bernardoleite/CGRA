@@ -32,15 +32,26 @@ function MySubmarine(scene) {
 	this.helice1 = new MyHelice(this.scene);
 	this.helice2 = new MyHelice(this.scene);
 	this.telescope = new MyTelescope(this.scene);
-	this.ssphere = new MySemiSphere(this.scene, 100, 5);
+	this.ssphere = new MyLamp(this.scene, 100, 5);
 	this.trapezius = new MyTrapezius(this.scene);
 	this.backhelice = new MyBackHelice(this.scene);
 	this.heli = new MyHeli(this.scene);
+	this.torpedo = new MyTorpedo (this.scene, 0, 0, 0,Math.PI/2);
 
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor=MySubmarine;
+
+   MySubmarine.prototype.update2 = function(t) {
+
+this.newPointx = Math.pow((1-t), 3)*this.p1x+ 3*t*Math.pow((1-t), 2)*this.p2x + 3*Math.pow(t,2)*(1-t)*this.p3x + Math.pow(t,3)*this.p4x;
+this.newPointy = Math.pow((1-t), 3)*this.p1y+ 3*t*Math.pow((1-t), 2)*this.p2y + 3*Math.pow(t,2)*(1-t)*this.p3y + Math.pow(t,3)*this.p4y;
+this.newPointz = Math.pow((1-t), 3)*this.p1z+ 3*t*Math.pow((1-t), 2)*this.p2z + 3*Math.pow(t,2)*(1-t)*this.p3z + Math.pow(t,3)*this.p4z;	
+	
+	console.log (this.newPointx, this.newPointy, this.newPointz);
+		  		
+  }
 
   MySubmarine.prototype.setAngleSec = function(ang) {
 	clockSecAngle=ang;
@@ -209,6 +220,20 @@ MySubmarine.prototype.display = function (){
 			this.scene.pushMatrix();
 				this.backhelice.display();
 			this.scene.popMatrix();
+
+					///////// torpedo
+
+		this.scene.pushMatrix();
+
+	if(this.scene.ACTIVATE_TORPEDO == true)
+		this.scene.translate(this.newPointz-this.torpedo.posz,this.newPointy-this.torpedo.posy, (this.newPointx-this.torpedo.posx)*-1);
+			
+
+	this.torpedo.display();
+			
+		this.scene.popMatrix();
+
+		///////// torpedo
 		
 
 			this.scene.pushMatrix();
@@ -231,7 +256,40 @@ MySubmarine.prototype.display = function (){
 		this.scene.popMatrix();
   	this.scene.popMatrix();
 
-			
+
+
+  	if(this.scene.ACTIVATE_TORPEDO == true){
+		
+	this.p1x = this.torpedo.posx;
+	this.p1y = this.torpedo.posy;
+	this.p1z = this.torpedo.posz;
+
+	//console.log ('ponto p1:',this.p1x, this.p1y, this.p1z );
+
+	this.p2x = this.torpedo.posx + Math.cos(this.angle)*6;
+	this.p2y = this.torpedo.posy;
+	this.p2z = this.torpedo.posz+ Math.sin(this.angle)*6;
+
+	//console.log('this.angle:', this.angle);
+	//console.log('Math.cos(this.angle):', Math.cos(this.angle));
+	//console.log ('ponto p2:',this.p2x, this.p2y, this.p2z );
+
+	this.p3x = this.scene.tx;
+	this.p3y = this.scene.ty+3;
+	this.p3z = this.scene.tz;
+
+	//console.log ('ponto p3:',this.p3x, this.p3y, this.p3z );
+
+	this.p4x = this.scene.tx;
+	this.p4y = this.scene.ty;
+	this.p4z = this.scene.tz;
+
+	//console.log ('ponto p4:',this.p4x, this.p4y, this.p4z );
+
+	
+}
+
+
 
 }
 

@@ -6,9 +6,14 @@ var BOARD_HEIGHT = 4.0;
 var BOARD_A_DIVISIONS = 30;  //2.5
 var BOARD_B_DIVISIONS = 100;
 var timer = -1;
+var timer2 = -1;
+
 function LightingScene() {
 	CGFscene.call(this);
 }
+
+var tvalue = 0;
+
 
 LightingScene.prototype = Object.create(CGFscene.prototype);
 LightingScene.prototype.constructor = LightingScene;
@@ -18,6 +23,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.luz0=true; this.luz1=true; this.luz2=true; this.luz3=true;
 	this.luz4=true; this.luz5=true; this.SubmarineSpeed=3; this.Clock = true;
+	this.ACTIVATE_TORPEDO = false;
 
 	this.Metal="resources/images/metal.png";
 	this.Simpson="resources/images/cylinder.png";
@@ -50,6 +56,10 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this,100,1);
 	this.bubble = new MyBigBubble(this);
+	this.target1 = new MyTarget(this,3,6,3);
+	this.tx = 3, this.ty = 6; this.tz = 3;
+	this.target2 = new MyTarget(this,0,0,0);
+
 
 	
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
@@ -210,16 +220,45 @@ LightingScene.prototype.updateLights = function() {
 
 LightingScene.prototype.update = function(currTime) {
 
+	var tempo2 = Math.floor(currTime/100); 
+
+	if (this.ACTIVATE_TORPEDO == true && tvalue <= 1){
+	if (this.timer2 != -1)
+	{
+		if (this.timer2 == tempo2)
+		{}
+
+		else if (this.timer2 != tempo2)
+		{
+			this.timer2 = tempo2;
+			this.submarine.update2(tvalue);
+			tvalue = tvalue + 0.01;
+		}
+	}
+
+
+
+	else if (this.timer2 == -1)
+		this.timer2 = tempo2;
+}	
+
+
+	if (tvalue == 1)
+		{
+			tvalue = 0;
+			this.ACTIVATE_TORPEDO = false;
+		}
+
+
 		if(this.textIndice != this.Texture)
 		{
 		this.textIndice=this.Texture;this.textFg=true;
 		}
 		if(this.textFg == true){
-		this.cylinderAppearance.loadTexture(this.textures[this.Texture]);
-		this.textFg=false;
+		this.cylinderAppearance.loadTexture(this.textures[this.Texture]);this.textFg=false;
 		}
 
-			this.submarine.update();
+		this.submarine.update();
 	
 	
 	var tempo = currTime/1000; 
@@ -244,32 +283,32 @@ if (this.Clock == true){
 
 	if(this.luz0 == true){
 	this.lights[0].enable();
-	}else{
+	}else if (this.luz0 == false){
 		this.lights[0].disable();
 	}
 	if(this.luz1 == true){
 		this.lights[1].enable();
-	}else{
+	}else if (this.luz1 == false){
 		this.lights[1].disable();
 	}
 	if(this.luz2 == true){
 		this.lights[2].enable();
-	}else{
+	}else if (this.luz2 == false){
 		this.lights[2].disable();
 	}
 	if(this.luz3 == true){
 		this.lights[3].enable();
-	}else{
+	}else if (this.luz3 == false){
 		this.lights[3].disable();
 	}
 	if(this.luz4 == true ){
 		this.lights[4].enable();
-	}else{
+	}else if (this.luz4 == false){
 		this.lights[4].disable();
 	}
 	if(this.luz5 == true){
 		this.lights[5].enable();
-	}else{
+	}else if (this.luz5 == false){
 		this.lights[5].disable();
 	}
 
@@ -440,13 +479,20 @@ this.translate(7,3,7);
 this.popMatrix();
 
 
+
+
+
+
 this.pushMatrix();
 
-//this.translate(5,0,2);
-
-//this.rotate(Math.PI/2,0,1,0);
-
 this.submarine.display();
+
+this.popMatrix();
+
+
+this.pushMatrix();
+
+	this.target1.display();
 
 this.popMatrix();
 

@@ -174,5 +174,13 @@ MyInterface.prototype.processKeyboard = function(event) {
 			this.scene.submarine.goPerDown();
 		    break;
 		}
+
+		case(70): // 'F'
+		{
+			this.scene.ACTIVATE_TORPEDO = true;
+		    break;
+		}
+
+		
 	};
 };
