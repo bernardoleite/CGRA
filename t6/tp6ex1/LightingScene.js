@@ -23,7 +23,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.luz0=true; this.luz1=true; this.luz2=true; this.luz3=true;
 	this.luz4=true; this.luz5=true; this.SubmarineSpeed=3; this.Clock = true;
-	this.ACTIVATE_TORPEDO = false;
+	this.ACTIVATE_TORPEDO = false; this.NR_TARGET = 0;
 
 	this.Metal="resources/images/metal.png";
 	this.Simpson="resources/images/cylinder.png";
@@ -57,11 +57,11 @@ LightingScene.prototype.init = function(application) {
 	this.poste = new MyCylinder(this,100,1);
 	this.bubble = new MyBigBubble(this);
 	this.target1 = new MyTarget(this,3,6,3);
-	this.tx = 3, this.ty = 6; this.tz = 3;
-	this.target2 = new MyTarget(this,0,0,0);
+	this.target2 = new MyTarget(this,4,5,-11);
+	this.target3 = new MyTarget(this,5,3,11);
+	this.targets = [this.target1, this.target2, this.target3];
 
 
-	
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 
@@ -243,10 +243,13 @@ LightingScene.prototype.update = function(currTime) {
 }	
 
 
-	if (tvalue == 1)
+	if (tvalue > 1)
 		{
 			tvalue = 0;
 			this.ACTIVATE_TORPEDO = false;
+			this.targets[this.NR_TARGET].bool = false;
+			this.NR_TARGET++;
+
 		}
 
 
@@ -492,7 +495,9 @@ this.popMatrix();
 
 this.pushMatrix();
 
-	this.target1.display();
+	if (this.targets[0].bool == true ) this.targets[0].display();
+	if (this.targets[1].bool == true ) this.targets[1].display();
+	if (this.targets[2].bool == true ) this.targets[2].display();
 
 this.popMatrix();
 

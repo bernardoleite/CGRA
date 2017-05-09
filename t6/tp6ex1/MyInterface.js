@@ -177,8 +177,14 @@ MyInterface.prototype.processKeyboard = function(event) {
 
 		case(70): // 'F'
 		{
+			if (this.scene.NR_TARGET >= 3)
+				console.log ('No More Targets!');
+				
+			if (this.scene.NR_TARGET < 3)
+			{	
 			this.scene.ACTIVATE_TORPEDO = true;
 		    break;
+			}
 		}
 
 		
