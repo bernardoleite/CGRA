@@ -137,6 +137,12 @@ LightingScene.prototype.init = function(application) {
 	this.posteAppearance.setSpecular(0.1,0.1,0.1,1);
 	this.posteAppearance.loadTexture("resources/images/metal.png");
 
+	this.fireAppearance = new CGFappearance(this);
+	this.fireAppearance.setDiffuse(1,1,1,1);
+	this.fireAppearance.setAmbient(0.4,0.4,0.4,1);	
+	this.fireAppearance.setShininess(10);
+	this.fireAppearance.setSpecular(0.1,0.1,0.1,1);
+	this.fireAppearance.loadTexture("resources/images/fire.jpg");
 
 
 ////////////////////Descomentar no fim
@@ -494,7 +500,7 @@ this.popMatrix();
 
 
 this.pushMatrix();
-
+this.fireAppearance.apply();
 	if (this.targets[0].bool == true ) this.targets[0].display();
 	if (this.targets[1].bool == true ) this.targets[1].display();
 	if (this.targets[2].bool == true ) this.targets[2].display();
