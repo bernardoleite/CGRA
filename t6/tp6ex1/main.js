@@ -27,6 +27,7 @@ serialInclude([
 	'MyHeli.js',
 	'MyTorpedo.js',
 	'MyTarget.js',
+	'Torpedo.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

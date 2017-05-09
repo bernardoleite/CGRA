@@ -36,7 +36,7 @@ function MySubmarine(scene) {
 	this.trapezius = new MyTrapezius(this.scene);
 	this.backhelice = new MyBackHelice(this.scene);
 	this.heli = new MyHeli(this.scene);
-	this.torpedo = new MyTorpedo (this.scene, 0, 0, 0,Math.PI/2);
+	this.torpedo = new Torpedo (this.scene, 0, 0, 0,Math.PI/2);
 
 };
 
@@ -220,7 +220,7 @@ MySubmarine.prototype.display = function (){
 			this.scene.pushMatrix();
 				this.backhelice.display();
 			this.scene.popMatrix();
-
+/*
 					///////// torpedo
 
 		this.scene.pushMatrix();
@@ -232,6 +232,8 @@ MySubmarine.prototype.display = function (){
 	this.torpedo.display();
 			
 		this.scene.popMatrix();
+*/
+
 
 		///////// torpedo
 		
@@ -256,6 +258,8 @@ MySubmarine.prototype.display = function (){
 		this.scene.popMatrix();
   	this.scene.popMatrix();
 
+this.scene.translate(this.newPointx-this.torpedo.posx,this.newPointy-this.torpedo.posy, this.newPointz-this.torpedo.posz);
+this.torpedo.display();
 
 
   	if(this.scene.ACTIVATE_TORPEDO == true){

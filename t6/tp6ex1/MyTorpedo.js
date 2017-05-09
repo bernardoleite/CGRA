@@ -31,10 +31,12 @@ MyTorpedo.prototype.display = function (){
 
 	this.scene.pushMatrix();
 		
+
 		this.scene.translate(-7,-2,0);
 		this.scene.rotate(Math.PI/2,0,1,0);
 		this.scene.scale(1/4,1/4,2);
 		this.scene.translate(0,0,2);
+		this.scene.translate(0,8,1);
 		this.corpo.display();
 
 	this.scene.popMatrix();
@@ -45,6 +47,7 @@ MyTorpedo.prototype.display = function (){
 		this.scene.rotate(Math.PI/2,0,1,0);
 		this.scene.translate(0,0,6);
 		this.scene.scale(1/4,1/4,1/4);
+		this.scene.translate(0,8,8);
 		this.front.display();
 
 	this.scene.popMatrix();
@@ -56,6 +59,7 @@ MyTorpedo.prototype.display = function (){
 		this.scene.translate(0,0,4);
 		this.scene.scale(1/4,1/4,1/4);
 		this.scene.rotate(Math.PI,0,1,0);
+		this.scene.translate(0,8,-8);
 		this.back.display();
 
 	this.scene.popMatrix();
@@ -68,20 +72,25 @@ MyTorpedo.prototype.display = function (){
 		this.scene.translate(0,0,4);
 		this.scene.rotate(Math.PI/2,1,0,0);
 		this.scene.scale(1/4,1/6,1/13);
+		this.scene.translate(0,24,0);
+		this.scene.translate(0,0,-27);
 		this.trap1.display();
 
 	this.scene.popMatrix();
 
 
 	this.scene.pushMatrix();
-	
+		
 		this.scene.translate(-7,-2,0);
 		this.scene.rotate(Math.PI/2,0,1,0);
 		this.scene.translate(0,0,4);
 		this.scene.rotate(Math.PI/2,0,1,0)
 		this.scene.rotate(Math.PI/2,0,0,1);
 		this.scene.scale(1/4,1/6,1/13);
+		this.scene.translate(0,24,0);
+		this.scene.translate(8,0,0);
 		this.trap2.display();
+
 
 	this.scene.popMatrix();
 
