@@ -37,10 +37,11 @@ this.torpedo.display();
 
 this.scene.popMatrix();
 
+
 this.posx = this.scene.submarine.x;
 this.posz = this.scene.submarine.z-1;
 this.posy = this.scene.submarine.y - 2;
- 
+
 
 
 
