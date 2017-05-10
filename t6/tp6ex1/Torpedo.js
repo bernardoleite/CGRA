@@ -46,8 +46,6 @@ this.posy = this.scene.submarine.y - 2;
 
 
 
-
-
 }
 
 

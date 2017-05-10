@@ -226,7 +226,7 @@ LightingScene.prototype.updateLights = function() {
 
 LightingScene.prototype.update = function(currTime) {
 
-	var tempo2 = Math.floor(currTime/100); 
+	var tempo2 = Math.floor(currTime/0.01); 
 
 	if (this.ACTIVATE_TORPEDO == true && tvalue <= 1){
 	if (this.timer2 != -1)
@@ -246,6 +246,7 @@ LightingScene.prototype.update = function(currTime) {
 
 	else if (this.timer2 == -1)
 		this.timer2 = tempo2;
+
 }	
 
 
@@ -255,6 +256,9 @@ LightingScene.prototype.update = function(currTime) {
 			this.ACTIVATE_TORPEDO = false;
 			this.targets[this.NR_TARGET].bool = false;
 			this.NR_TARGET++;
+			this.submarine.newPointx = 0;
+			this.submarine.newPointy = 0;
+			this.submarine.newPointz = 0;
 
 		}
 
