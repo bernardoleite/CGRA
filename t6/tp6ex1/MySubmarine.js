@@ -213,12 +213,14 @@ MySubmarine.prototype.display = function (){
 					this.trapezius.display();
 			this.scene.popMatrix();
 
-		/////////// ventoinha trazeira
-
+		/////////// ventoinha trazeira - foi alterado desde aqui até:
 			this.scene.pushMatrix();
+				this.scene.translate(-6.0,0,0);
+				this.scene.rotate(Math.PI/2, 0,1,0);
+				this.scene.rotate(this.rangle/2.5, 0,1,0);
 				this.backhelice.display();
 			this.scene.popMatrix();
-
+		//// aqui! (nao esquecer de substituir o codigo do MybackHelice todo pelo desta versao!)
 		
 
 			this.scene.pushMatrix();
@@ -279,6 +281,10 @@ this.scene.popMatrix();
 
 	
 }
+
+/*this.scene.pushMatrix();
+				this.backhelice.display();
+			this.scene.popMatrix();*/
 
 
 
