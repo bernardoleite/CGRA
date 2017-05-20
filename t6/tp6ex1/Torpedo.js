@@ -16,10 +16,12 @@ function Torpedo(scene, posx = 0, posy =0, posz = 0, orient = 0) {
 	this.back = new MyLamp (this.scene,100,5);
 	this.trap1 = new MyTrapezius(this.scene);
 	this.trap2 = new MyTrapezius(this.scene);
-	this.torpedo = new MyTorpedo (this.scene, 0, 0, 0,Math.PI/2);
+	this.torpedo = new MyTorpedo (this.scene, this.scene.submarine.x, this.scene.submarine.y, this.scene.submarine.z,Math.PI/2);
 
 
 	this.targets = [this.scene.target1,this.scene.target2];
+
+
 	
 };
 
@@ -30,19 +32,23 @@ Torpedo.prototype.display = function (){
 
 this.scene.pushMatrix();
 
-this.scene.translate(this.posx,this.posy,this.posz);
-this.scene.rotate(this.scene.submarine.angle, 0,1,0);
+this.scene.rotate(this.scene.torpedoAng, 0,1,0);
 
 this.torpedo.display();
 
 this.scene.popMatrix();
 
 
-this.posx = this.scene.submarine.x;
+this.posx = this.scene.submarine.x ;
 this.posz = this.scene.submarine.z-1;
 this.posy = this.scene.submarine.y - 2;
 
+this.difx = this.scene.newPointx - this.scene.oldPointx;
+this.difz = this.scene.newPointz - this.scene.oldPointz;
+this.dify = this.scene.newPointy - this.scene.oldPointy;
 
+this.horizontalAng=Math.atan2((this.difx),(this.difz));
+this.verticalAng=Math.atan2(Math.abs(this.dify),Math.abs(this.difz));
 
 
 

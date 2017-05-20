@@ -28,7 +28,9 @@ MyTorpedo.prototype.constructor=MyTorpedo;
 
 MyTorpedo.prototype.display = function (){
 
-
+this.scene.pushMatrix();
+	//this.scene.rotate(Math.PI/2,0,1,0);
+//this.scene.translate(-1,2,0);
 	this.scene.pushMatrix();
 		
 
@@ -93,14 +95,7 @@ MyTorpedo.prototype.display = function (){
 
 
 	this.scene.popMatrix();
-
-
-this.posx = this.scene.submarine.x;
-this.posz = this.scene.submarine.z-1;
-this.posy = this.scene.submarine.y - 2;
- 
-
-
+this.scene.popMatrix();
 
 
 

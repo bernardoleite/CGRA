@@ -27,7 +27,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.Metal="resources/images/metal.png";
 	this.Simpson="resources/images/cylinder.png";
-	this.Blue="resources/images/water.png";
+	this.Blue="resources/images/ocean.jpg";
 
 	this.textures = [this.Metal,this.Simpson,this.Blue];
 	this.textIndice=1;
@@ -56,10 +56,11 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this,100,1);
 	this.bubble = new MyBigBubble(this);
-	this.target1 = new MyTarget(this,3,6,3);
+	this.target1 = new MyTarget(this,4,2,3);
 	this.target2 = new MyTarget(this,4,5,-11);
 	this.target3 = new MyTarget(this,5,3,11);
 	this.targets = [this.target1, this.target2, this.target3];
+	this.torpedo = new Torpedo (this, 0, 0, 0,Math.PI/2);
 
 
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
@@ -142,7 +143,15 @@ LightingScene.prototype.init = function(application) {
 	this.fireAppearance.setAmbient(0.4,0.4,0.4,1);	
 	this.fireAppearance.setShininess(10);
 	this.fireAppearance.setSpecular(0.1,0.1,0.1,1);
-	this.fireAppearance.loadTexture("resources/images/fire.jpg");
+	this.fireAppearance.loadTexture("resources/images/wood.jpg");
+
+
+	this.torpedoAppearance = new CGFappearance(this);
+	this.torpedoAppearance.setDiffuse(1,1,1,1);
+	this.torpedoAppearance.setAmbient(0.4,0.4,0.4,1);	
+	this.torpedoAppearance.setShininess(10);
+	this.torpedoAppearance.setSpecular(0.1,0.1,0.1,1);
+	this.torpedoAppearance.loadTexture("resources/images/torpedo.jpg");
 
 
 ////////////////////Descomentar no fim
@@ -214,6 +223,20 @@ LightingScene.prototype.initLights = function() {
 
 };
 
+LightingScene.prototype.updatePoints = function() {
+
+	this.p1x = this.submarine.x;
+	this.p1y = this.submarine.y-3;
+	this.p1z = this.submarine.z;
+
+	this.p2x = this.submarine.x + Math.cos(-Math.PI/2)*6;
+	this.p2y = this.submarine.y;
+	this.p2z = this.submarine.z+ Math.sin(-Math.PI/2)*6;
+
+
+}
+
+
 
 
 
@@ -237,7 +260,19 @@ LightingScene.prototype.update = function(currTime) {
 		else if (this.timer2 != tempo2)
 		{
 			this.timer2 = tempo2;
-			this.submarine.update2(tvalue);
+
+
+
+this.oldPointx = this.newPointx;
+this.newPointx = Math.pow((1-tvalue), 3)*this.p1x+ 3*tvalue*Math.pow((1-tvalue), 2)*this.p2x + 3*Math.pow(tvalue,2)*(1-tvalue)*this.p3x + Math.pow(tvalue,3)*this.p4x;
+
+this.oldPointy = this.newPointy;
+this.newPointy = Math.pow((1-tvalue), 3)*this.p1y+ 3*tvalue*Math.pow((1-tvalue), 2)*this.p2y + 3*Math.pow(tvalue,2)*(1-tvalue)*this.p3y + Math.pow(tvalue,3)*this.p4y;
+
+this.oldPointz = this.newPointz;
+this.newPointz = Math.pow((1-tvalue), 3)*this.p1z+ 3*tvalue*Math.pow((1-tvalue), 2)*this.p2z + 3*Math.pow(tvalue,2)*(1-tvalue)*this.p3z + Math.pow(tvalue,3)*this.p4z;	
+
+
 			tvalue = tvalue + 0.01;
 		}
 	}
@@ -256,9 +291,7 @@ LightingScene.prototype.update = function(currTime) {
 			this.ACTIVATE_TORPEDO = false;
 			this.targets[this.NR_TARGET].bool = false;
 			this.NR_TARGET++;
-			this.submarine.newPointx = 0;
-			this.submarine.newPointy = 0;
-			this.submarine.newPointz = 0;
+
 
 		}
 
@@ -492,10 +525,6 @@ this.translate(7,3,7);
 this.popMatrix();
 
 
-
-
-
-
 this.pushMatrix();
 
 this.submarine.display();
@@ -510,6 +539,43 @@ this.fireAppearance.apply();
 	if (this.targets[2].bool == true ) this.targets[2].display();
 
 this.popMatrix();
+
+
+  	if(this.ACTIVATE_TORPEDO == true){
+
+
+	this.p3x = this.targets[this.NR_TARGET].posx;
+	this.p3y = this.targets[this.NR_TARGET].posy+3;
+	this.p3z = this.targets[this.NR_TARGET].posz;
+
+	//console.log ('ponto p3:',this.p3x, this.p3y, this.p3z );
+
+	this.p4x = this.targets[this.NR_TARGET].posx;
+	this.p4y = this.targets[this.NR_TARGET].posy;
+	this.p4z = this.targets[this.NR_TARGET].posz;
+
+	//console.log ('ponto p4:',this.p4x, this.p4y, this.p4z );
+console.log(this.p1x, this.p1y, this.p1z);
+}
+
+this.pushMatrix();
+
+if (this.ACTIVATE_TORPEDO == true){
+	//this.scene.translate(0,-1.5,-1);
+
+		this.translate(this.newPointx,this.newPointy, this.newPointz);
+		this.rotate(this.torpedo.verticalAng, 0,0,1);
+		this.rotate(this.torpedo.horizontalAng, 0,1,0);
+
+this.torpedoAppearance.apply();
+this.torpedo.display();
+
+
+this.popMatrix();
+
+
+
+}
 
 
 

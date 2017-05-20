@@ -12,7 +12,7 @@ function MyTarget(scene, posx = 0, posy =0, posz = 0) {
 	this.bool = true;
 
 
-	this.targett= new MyCylinder(this.scene, 10, 1);
+	this.targett= new MyUnitCubeQuad(this.scene, 10, 1);
 
 	
 };

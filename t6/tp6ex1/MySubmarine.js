@@ -21,7 +21,6 @@ function MySubmarine(scene) {
     this.x = 0;
     this.z = 0;
     this.speed = 0;
-    this.rrangle = 0;
 
     this.perZ = -0.5;
 
@@ -37,20 +36,14 @@ function MySubmarine(scene) {
 	this.trapezius = new MyTrapezius(this.scene);
 	this.backhelice = new MyBackHelice(this.scene);
 	this.heli = new MyHeli(this.scene);
-	this.torpedo = new Torpedo (this.scene, 0, 0, 0,Math.PI/2);
+	
 
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor=MySubmarine;
 
-   MySubmarine.prototype.update2 = function(t) {
 
-this.newPointx = Math.pow((1-t), 3)*this.p1x+ 3*t*Math.pow((1-t), 2)*this.p2x + 3*Math.pow(t,2)*(1-t)*this.p3x + Math.pow(t,3)*this.p4x;
-this.newPointy = Math.pow((1-t), 3)*this.p1y+ 3*t*Math.pow((1-t), 2)*this.p2y + 3*Math.pow(t,2)*(1-t)*this.p3y + Math.pow(t,3)*this.p4y;
-this.newPointz = Math.pow((1-t), 3)*this.p1z+ 3*t*Math.pow((1-t), 2)*this.p2z + 3*Math.pow(t,2)*(1-t)*this.p3z + Math.pow(t,3)*this.p4z;	
-		  		
-  }
 
   MySubmarine.prototype.setAngleSec = function(ang) {
 	clockSecAngle=ang;
@@ -66,7 +59,6 @@ MySubmarine.prototype.goLeft = function() {
 		this.angle = newAng;
 
 	this.rangle = - Math.PI/7;
-	this.rrangle = -Math.PI/7;
 	this.updown = 0;
 	this.dir = 1;
 }
@@ -80,7 +72,6 @@ MySubmarine.prototype.goRight = function() {
         this.angle = newAng;
 
     this.rangle = Math.PI/7;
-   this.rrangle = Math.PI/7;
     this.updown = 0;
 	this.dir = 1;
 };
@@ -102,8 +93,6 @@ MySubmarine.prototype.goFront = function() {
 		this.rangle = 0;
 		this.updown = 0;
 		this.dir = 1;
-	   this.rrangle = 0;
-
 
 };
 
@@ -113,8 +102,6 @@ MySubmarine.prototype.goBack = function() {
 		this.rangle = 0;
 		this.updown = 0;
 		this.dir = 1;
-			   this.rrangle = 0;
-
 
 };
 
@@ -124,8 +111,6 @@ MySubmarine.prototype.goUp = function() {
 		this.updown = 1;
 		this.dir = 0;
 		this.rangle = Math.PI/2;
-			   this.rrangle = 0;
-
 
 };
 
@@ -135,8 +120,6 @@ MySubmarine.prototype.goDown = function() {
 		this.updown = 1;
 		this.dir = 0;
 		this.rangle = Math.PI/2;
-			   this.rrangle = 0;
-
 
 };
 
@@ -159,8 +142,6 @@ MySubmarine.prototype.goPerDown = function() {
 
 
 MySubmarine.prototype.display = function (){
-
-
 
 	this.scene.pushMatrix();
 		this.scene.translate(this.x, this.y, this.z);
@@ -224,14 +205,15 @@ MySubmarine.prototype.display = function (){
 					this.trapezius.display();
 			this.scene.popMatrix();
 
-		/////////// ventoinha trazeira - foi alterado desde aqui até:
+		/////////// ventoinha trazeira
+
 			this.scene.pushMatrix();
 				this.scene.translate(-6.0,0,0);
-				this.scene.rotate(Math.PI/2, 0,1,0);
-				this.scene.rotate(this.rrangle/2, 0,1,0);
+ 				this.scene.rotate(Math.PI/2, 0,1,0);
+ 				this.scene.rotate(this.rangle/2.5, 0,1,0);
 				this.backhelice.display();
 			this.scene.popMatrix();
-		//// aqui! (nao esquecer de substituir o codigo do MybackHelice todo pelo desta versao!)
+
 		
 
 			this.scene.pushMatrix();
@@ -255,51 +237,15 @@ MySubmarine.prototype.display = function (){
   	this.scene.popMatrix();
 
 
-this.scene.pushMatrix();
-if (this.scene.ACTIVATE_TORPEDO == true){
-	this.scene.translate(this.newPointx-this.torpedo.posx,this.newPointy-this.torpedo.posy, this.newPointz-this.torpedo.posz);
-	this.torpedo.display();
-}
-this.scene.popMatrix();
-
-  	if(this.scene.ACTIVATE_TORPEDO == true){
-		
-	this.p1x = this.torpedo.posx;
-	this.p1y = this.torpedo.posy;
-	this.p1z = this.torpedo.posz;
-
-	//console.log ('ponto p1:',this.p1x, this.p1y, this.p1z );
-
-	this.p2x = this.torpedo.posx + Math.cos(this.angle)*6;
-	this.p2y = this.torpedo.posy;
-	this.p2z = this.torpedo.posz+ Math.sin(this.angle)*6;
-
-	//console.log('this.angle:', this.angle);
-	//console.log('Math.cos(this.angle):', Math.cos(this.angle));
-	//console.log ('ponto p2:',this.p2x, this.p2y, this.p2z );
-
-	this.p3x = this.scene.targets[this.scene.NR_TARGET].posx;
-	this.p3y = this.scene.targets[this.scene.NR_TARGET].posy+3;
-	this.p3z = this.scene.targets[this.scene.NR_TARGET].posz;
-
-	//console.log ('ponto p3:',this.p3x, this.p3y, this.p3z );
-
-	this.p4x = this.scene.targets[this.scene.NR_TARGET].posx;
-	this.p4y = this.scene.targets[this.scene.NR_TARGET].posy;
-	this.p4z = this.scene.targets[this.scene.NR_TARGET].posz;
-
-	//console.log ('ponto p4:',this.p4x, this.p4y, this.p4z );
-
-	
-}
-
-/*this.scene.pushMatrix();
-				this.backhelice.display();
-			this.scene.popMatrix();*/
-
-
 
 }
+
+
+
+
+
+
+
 
 
 

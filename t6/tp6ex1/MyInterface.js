@@ -182,6 +182,22 @@ MyInterface.prototype.processKeyboard = function(event) {
 				
 			if (this.scene.NR_TARGET < 3)
 			{	
+			this.scene.updatePoints();
+			this.scene.torpedoAng = Math.PI/2;
+			this.scene.ACTIVATE_TORPEDO = true;
+		    break;
+			}
+		}
+
+		case(102): // 'f'
+		{
+			if (this.scene.NR_TARGET >= 3)
+				console.log ('No More Targets!');
+				
+			if (this.scene.NR_TARGET < 3)
+			{	
+			this.scene.updatePoints();
+			this.scene.torpedoAng = Math.PI/2;
 			this.scene.ACTIVATE_TORPEDO = true;
 		    break;
 			}
