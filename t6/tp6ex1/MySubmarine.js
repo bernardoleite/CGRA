@@ -21,6 +21,8 @@ function MySubmarine(scene) {
     this.x = 0;
     this.z = 0;
     this.speed = 0;
+    this.rrangle = 0;
+
 
     this.perZ = -0.5;
 
@@ -61,6 +63,7 @@ MySubmarine.prototype.goLeft = function() {
 	this.rangle = - Math.PI/7;
 	this.updown = 0;
 	this.dir = 1;
+	this.rrangle = -Math.PI/7;
 }
 ;
 
@@ -72,8 +75,10 @@ MySubmarine.prototype.goRight = function() {
         this.angle = newAng;
 
     this.rangle = Math.PI/7;
+    this.rrangle = Math.PI/7;
     this.updown = 0;
-	this.dir = 1;
+	this.dir = 1
+	this.rrangle = Math.PI/7;
 };
 
 
@@ -93,6 +98,7 @@ MySubmarine.prototype.goFront = function() {
 		this.rangle = 0;
 		this.updown = 0;
 		this.dir = 1;
+		this.rrangle = 0;
 
 };
 
@@ -102,6 +108,7 @@ MySubmarine.prototype.goBack = function() {
 		this.rangle = 0;
 		this.updown = 0;
 		this.dir = 1;
+		this.rrangle = 0;
 
 };
 
@@ -111,6 +118,7 @@ MySubmarine.prototype.goUp = function() {
 		this.updown = 1;
 		this.dir = 0;
 		this.rangle = Math.PI/2;
+		this.rrangle = 0;
 
 };
 
@@ -120,6 +128,7 @@ MySubmarine.prototype.goDown = function() {
 		this.updown = 1;
 		this.dir = 0;
 		this.rangle = Math.PI/2;
+		this.rrangle = 0;
 
 };
 
@@ -210,7 +219,7 @@ MySubmarine.prototype.display = function (){
 			this.scene.pushMatrix();
 				this.scene.translate(-6.0,0,0);
  				this.scene.rotate(Math.PI/2, 0,1,0);
- 				this.scene.rotate(this.rangle/2.5, 0,1,0);
+ 				this.scene.rotate(this.rrangle/2.5, 0,1,0);
 				this.backhelice.display();
 			this.scene.popMatrix();
 

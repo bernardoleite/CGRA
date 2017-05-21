@@ -32,7 +32,14 @@ LightingScene.prototype.init = function(application) {
 	this.textures = [this.Metal,this.Simpson,this.Blue];
 	this.textIndice=1;
 	this.Texture = 0;
+	
+	this.targetf1=0;
+	this.targetf2=0;
+	this.targetf3=0;
 
+	this.count = 0;
+
+	this.exp = 1;
 	
 	this.initCameras();
 
@@ -61,6 +68,7 @@ LightingScene.prototype.init = function(application) {
 	this.target3 = new MyTarget(this,5,3,11);
 	this.targets = [this.target1, this.target2, this.target3];
 	this.torpedo = new Torpedo (this, 0, 0, 0,Math.PI/2);
+	this.explosion = new explosion(this);
 
 
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
@@ -251,7 +259,7 @@ LightingScene.prototype.update = function(currTime) {
 
 	var tempo2 = Math.floor(currTime/0.01); 
 
-	if (this.ACTIVATE_TORPEDO == true && tvalue <= 1){
+	if (this.ACTIVATE_TORPEDO == true && tvalue <= 0.8){
 	if (this.timer2 != -1)
 	{
 		if (this.timer2 == tempo2)
@@ -260,7 +268,6 @@ LightingScene.prototype.update = function(currTime) {
 		else if (this.timer2 != tempo2)
 		{
 			this.timer2 = tempo2;
-
 
 
 this.oldPointx = this.newPointx;
@@ -279,13 +286,32 @@ this.newPointz = Math.pow((1-tvalue), 3)*this.p1z+ 3*tvalue*Math.pow((1-tvalue),
 
 
 
-	else if (this.timer2 == -1)
+	else if (this.timer2 == -1){
 		this.timer2 = tempo2;
+		}
 
-}	
+}
+
+if(tvalue > 0.8){
+	this.targetf1=1;
+	this.count +=1;
+}
 
 
-	if (tvalue > 1)
+	if(this.targetf1 == 1){
+		if(this.exp < 20){
+			this.exp += 1;
+		}
+		else{
+			this.targetf1 = 0;
+			this.exp = 1;
+		}
+	}
+
+
+
+
+	if (tvalue > 0.8)
 		{
 			tvalue = 0;
 			this.ACTIVATE_TORPEDO = false;
@@ -537,6 +563,35 @@ this.fireAppearance.apply();
 	if (this.targets[0].bool == true ) this.targets[0].display();
 	if (this.targets[1].bool == true ) this.targets[1].display();
 	if (this.targets[2].bool == true ) this.targets[2].display();
+	//if (this.targets[0].bool == false ){
+		if(this.count == 1){
+			this.pushMatrix();
+				this.translate(this.targets[0].posx,this.targets[0].posy+1,this.targets[0].posz);
+				this.pushMatrix();
+					this.scale(this.exp,this.exp,this.exp);
+					this.explosion.display();
+				this.popMatrix();
+			this.popMatrix();
+		}
+		else if(this.count == 2){
+			this.pushMatrix();
+				this.translate(this.targets[1].posx,this.targets[1].posy+1,this.targets[1].posz);
+				this.pushMatrix();
+					this.scale(this.exp,this.exp,this.exp);
+					this.explosion.display();
+				this.popMatrix();
+			this.popMatrix();
+		}
+		else if(this.count == 3){
+			this.pushMatrix();
+				this.translate(this.targets[2].posx,this.targets[2].posy+1,this.targets[2].posz);
+				this.pushMatrix();
+					this.scale(this.exp,this.exp,this.exp);
+					this.explosion.display();
+				this.popMatrix();
+			this.popMatrix();
+		}
+	//}
 
 this.popMatrix();
 
@@ -569,15 +624,14 @@ if (this.ACTIVATE_TORPEDO == true){
 
 this.torpedoAppearance.apply();
 this.torpedo.display();
+//this.translate(0,1,0);
+//this.torpedo.display();
 
 
 this.popMatrix();
 
 
-
 }
-
-
 
 };
 
